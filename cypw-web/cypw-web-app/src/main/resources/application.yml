@@ -1,0 +1,130 @@
+# Web Configurations
+server:
+  port: 8602
+
+# Spring Configurations
+spring:
+  main:
+    allow-bean-definition-overriding: true # 允许FeignClient多接口使用相同服务名
+  application:
+    name: cypw-web
+
+# Management Configurations
+management:
+  server:
+    port: 18602 # server的端口加10000
+
+# Eureka configurations
+eureka:
+  instance:
+    appname: ${spring.application.name}
+    instanceId: ${spring.cloud.client.ip-address} # 指定使用IP地址作为服务实例ID
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: ${var.eureka.renewalInterval}  # 心跳时间间隔
+    leaseExpirationDurationInSeconds: ${var.eureka.expireDuration}  # 失联移除时间间隔
+  healthcheck:
+    enabled: true  # 支持心跳时带健康检查
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    registryFetchIntervalSeconds: ${var.eureka.fetchInterval}
+    serviceUrl:
+      defaultZone: ${var.eureka.serviceUrls}
+
+# Hystrix configurations
+hystrix:
+  threadpool:
+    default:
+      coreSize: 8  # 核心线程数
+      maximumSize: 16  # 最大线程数，Greenwich下才生效，老版本coreSize与maximumSize一致
+      allowMaximumSizeToDivergeFromCoreSize: true # 允许动态扩展线程池中核心线程数到最大线程数，Greenwich下才生效
+      maxQueueSize: 16  # 使用LinkedBlockingQueue，默认队列长度
+      queueSizeRejectionThreshold: 16 # 拒绝阈值设置成跟队列长度一致
+  command:
+    default:   # 通用的隔离策略配置
+      execution:
+        isolation:
+          strategy : THREAD
+          thread:
+            timeoutInMilliseconds: 10000  # 客户端等待多长时间
+
+# Feign configurations
+feign:
+  hystrix:
+    enabled: true
+
+# Ribbon configurations
+ribbon:
+  MaxAutoRetries: 1 # Max number of retries on the same server (excluding the first try)
+  MaxAutoRetriesNextServer: 1 # Max number of next servers to retry (excluding the first server)
+  OkToRetryOnAllOperations: false  # Whether all operations can be retried for this client
+  ServerListRefreshInterval: 2000  # Interval to refresh the server list from the source
+  ConnectTimeout: 3000  # Connect timeout used by Apache HttpClient
+  ReadTimeout: 5000  # Read timeout used by Apache HttpClient
+
+
+# Apollo configurations
+apollo:
+  autoUpdateInjectedSpringProperties: true
+  bootstrap:
+    enabled: true
+    namespaces: ${var.apollo.namespaces}  #服务空间
+app:
+  id: ${var.apollo.appId}  #项目ID
+namespaces:
+  val: ${var.apollo.namespaces}
+
+common:
+  redis:
+    redisType:
+      single: true
+      cluster: false
+      sentinel: false
+    hostName: ${redis_hostname}:${redis_port}
+    password: ${redis_pwd}
+    timeout: 3000
+    maxIdle: 300
+    maxTotal: 600
+    maxWaitMillis: 1000
+    testOnBorrow: true
+    type: single
+
+
+ucloud:
+  publicKey: bI4ZthH_aife7suwyXGFHg0DiqkBYHCmZKydICp_
+  privateKey: 0yUnl6IZ9UyG_70g5gfPGwJBwQg7NJ_cHUTDQzwjQvpQHhEppLfZ08oM_F6SFj-F
+  bucketName: caiyi
+  region: cn-sh2
+  proxySuffix: ufileos.com
+  domain: http://caiyi.cn-sh2.ufileos.com/
+
+
+aes:
+  key: 3JEFX9]A4W5FdS{[*&
+  iv: 0807060504030201
+
+wx:
+  notify:
+    url: https://yuyuandev.fhlun.com/api/pub/v1/notify/wx
+ali:
+  notify:
+    url: https://yuyuandev.fhlun.com/api/pub/v1/notify/ali
+  quit:
+    url: https://yuyuandev.fhlun.com/api/pub/v1/notify/ali
+
+cmb:
+  notify:
+    url: https://yuyuandev.fhlun.com/api/pub/v1/notify/cm
+  quit:
+    url: https://smg.ticketgo.cn/t/73524298059403264/
+paypal:
+  cancel:
+    url: https://smg.ticketgo.cn/t/73524298059403264/
+  success:
+    url: https://smg.ticketgo.cn/t/73524298059403264/
+  return:
+    url: https://smg.ticketgo.cn/t/73524298059403264/
+ccb:
+  referer:
+    url: https://smg.ticketgo.cn/t/73524298059403264/
+soonExpireRemindDay: 3

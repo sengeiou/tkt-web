@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.mtl.common</groupId>
+        <artifactId>common-dependencies</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.mtl.cypw</groupId>
+    <artifactId>cypw-web</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>cypw-web</name>
+
+
+<modules>
+    <module>cypw-web-common</module>
+    <module>cypw-web-rest-provider</module>
+    <module>cypw-web-app</module>
+</modules>
+
+<!--The version of dependency jars are managed here-->
+<properties>
+    <skipTests>true</skipTests>
+
+    <!--Third party jars-->
+    <joda.version>2.9.9</joda.version>
+    <guava.version>20.0</guava.version>
+    <lombok.version>1.18.10</lombok.version>
+    <swagger.version>2.9.2</swagger.version>
+    <springfox-version>2.5.0</springfox-version>
+    <logback-gelf.version>0.3</logback-gelf.version>
+    <commons-lang.version>3.3.2</commons-lang.version>
+    <commons-collections.version>3.2.2</commons-collections.version>
+
+    <!--CYPW service jars-->
+    <cypw.tktstar.api.version>1.0.0-SNAPSHOT</cypw.tktstar.api.version>
+
+    <!--MTL common jars. TODO: the common versions maybe not the latest-->
+    <common-datasource.version>2.0.0-SNAPSHOT</common-datasource.version>
+    <common-model.version>2.0.0-SNAPSHOT</common-model.version>
+    <common-bizmodel.version>2.0.0-SNAPSHOT</common-bizmodel.version>
+    <common-utils.version>2.0.0-SNAPSHOT</common-utils.version>
+    <common-aspect.version>2.0.0-SNAPSHOT</common-aspect.version>
+    <common-errors.version>2.0.0-SNAPSHOT</common-errors.version>
+    <common-health.version>2.0.0-SNAPSHOT</common-health.version>
+</properties>
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.moocar</groupId>
+            <artifactId>logback-gelf</artifactId>
+            <version>${logback-gelf.version}</version>
+        </dependency>
+
+        <!--tktstar-web-->
+        <dependency>
+            <groupId>com.mtl.cypw</groupId>
+            <artifactId>cypw-tktstar-api</artifactId>
+            <version>${cypw.tktstar.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mtl.cypw</groupId>
+            <artifactId>cypw-web-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mtl.cypw</groupId>
+            <artifactId>cypw-web-rest-provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!--tktstar-common-->
+        <dependency>
+            <groupId>com.mtl.cypw</groupId>
+            <artifactId>cypw-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!--MTL Commons-->
+        <dependency>
+            <groupId>com.mtl.common</groupId>
+            <artifactId>common-model</artifactId>
+            <version>${common-model.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mtl.common</groupId>
+            <artifactId>common-bizmodel</artifactId>
+            <version>${common-bizmodel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mtl.common</groupId>
+            <artifactId>common-utils</artifactId>
+            <version>${common-utils.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mtl.common</groupId>
+            <artifactId>common-datasource</artifactId>
+            <version>${common-datasource.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mtl.common</groupId>
+            <artifactId>common-error</artifactId>
+            <version>${common-errors.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mtl.common</groupId>
+            <artifactId>common-error-handler</artifactId>
+            <version>${common-errors.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mtl.common</groupId>
+            <artifactId>common-aspect</artifactId>
+            <version>${common-aspect.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mtl.common</groupId>
+            <artifactId>common-health</artifactId>
+            <version>${common-health.version}</version>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+<build>
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+</build>
+
+<distributionManagement>
+    <repository>
+        <id>releases</id>
+        <url>${nexus.releases.url}</url>
+    </repository>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <url>${nexus.snapshots.url}</url>
+    </snapshotRepository>
+</distributionManagement>
+</project>
+
